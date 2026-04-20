@@ -1,0 +1,21 @@
+{
+  "name": "japon-bot-2026",
+  "version": "1.0.0",
+  "description": "Bot de Telegram para el viaje a Japón 2026",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js"
+  },
+  "dependencies": {
+    "googleapis": "^140.0.0",
+    "node-telegram-bot-api": "^0.66.0",
+    "openai": "^4.67.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
