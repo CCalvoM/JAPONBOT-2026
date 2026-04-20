@@ -1,6 +1,12 @@
 const OpenAI = require('openai');
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let client = null;
+function getClient() {
+  if (!client) {
+    client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return client;
+}
 
 const SYSTEM_PROMPT = `Eres el asistente oficial del viaje a Japón 2026 de un grupo de 10 amigos españoles.
 El viaje es del 21 de agosto al 5 de septiembre de 2026, pasando por Osaka, Kyoto y Tokio.
@@ -52,7 +58,7 @@ El usuario que escribe ahora se llama: ${userName}`
     ...conversationHistory.slice(-15), // últimos 15 mensajes
   ];
 
-  const response = await client.chat.completions.create({
+  const response = await getClient().chat.completions.create({
     model: 'gpt-4o',
     messages,
     max_tokens: 500,
