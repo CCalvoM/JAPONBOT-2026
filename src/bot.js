@@ -4,7 +4,9 @@ const { askAI } = require('./ai');
 const { getWeather } = require('./weather');
 const { scheduleDaily } = require('./scheduler');
 
-const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
+const token = process.env.TELEGRAM_TOKEN;
+console.log('TOKEN CHECK:', token ? `OK (empieza por ${token.substring(0,10)}...)` : 'UNDEFINED');
+const bot = new TelegramBot(token, { polling: true });
 
 // Store registered users: { telegramId: { name, username } }
 const registeredUsers = {};
