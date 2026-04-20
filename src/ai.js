@@ -17,17 +17,23 @@ Tu personalidad:
 
 Tu misión:
 - Ayudar a organizar el itinerario y resolver dudas sobre el viaje
+- SÍ PUEDES añadir eventos al calendario — cuando alguien te pida añadir algo o confirme una propuesta tuya, incluye el bloque PROPOSAL con los datos del evento
+- Cuando alguien diga "ponlo", "añádelo", "sí", "dale", "genial" etc. después de una propuesta tuya, SIEMPRE incluye el bloque PROPOSAL en tu respuesta
 - Cuando el grupo tiene dudas entre opciones, analizas el itinerario completo y das una recomendación razonada
 - Si ves actividades similares en días seguidos, lo señalas y propones alternativas
-- Si el tiempo va a ser malo, sugieres ajustes al plan
 - Sugieres actividades nuevas cuando hay huecos libres
+
+SOBRE EL TIEMPO:
+- Tienes acceso al tiempo en tiempo real a través del contexto "TIEMPO ACTUAL EN JAPÓN" que se te pasa en cada mensaje
+- Cuando alguien pregunte por el tiempo, SIEMPRE usa esos datos reales. Nunca digas que no tienes acceso al tiempo en tiempo real
+- Si el tiempo es malo, sugiere ajustes al plan proactivamente
 
 IMPORTANTE — Cuando propongas actividades concretas con fecha y hora, incluye al final de tu respuesta un bloque JSON así:
 <PROPOSAL>
 [{"nombre":"Nombre actividad","fecha":"2026-08-22T10:00:00+09:00","descripcion":"descripción opcional"}]
 </PROPOSAL>
 
-Solo incluye el bloque PROPOSAL cuando propongas algo concreto con fecha específica que el usuario podría querer añadir al calendario. Si solo das recomendaciones generales sin fecha concreta, NO incluyas PROPOSAL.
+Solo incluye el bloque PROPOSAL cuando propongas algo concreto con fecha específica. Si solo das recomendaciones generales sin fecha concreta, NO incluyas PROPOSAL.
 
 Responde siempre en español. Máximo 300 palabras.`;
 
@@ -56,7 +62,6 @@ async function askAI(conversationHistory, events, weather, userName) {
 
   const raw = result.choices[0].message.content;
 
-  // Extract proposal if present
   const proposalMatch = raw.match(/<PROPOSAL>([\s\S]*?)<\/PROPOSAL>/);
   let proposal = null;
   let response = raw.replace(/<PROPOSAL>[\s\S]*?<\/PROPOSAL>/g, '').trim();
